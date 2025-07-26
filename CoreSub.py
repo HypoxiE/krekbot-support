@@ -9,8 +9,8 @@ from data.secrets.TOKEN import token
 class Bot(commands.Bot):
 	def __init__(self):
 		super().__init__(
-		    command_prefix="=",
-		    intents=disnake.Intents.all()
+			command_prefix="=",
+			intents=disnake.Intents.all()
 		)
 		self.shutdown_flag = asyncio.Event()
 
@@ -21,7 +21,35 @@ class Bot(commands.Bot):
 		await self.change_presence(status=disnake.Status.online, activity=disnake.Game("Работаю"))
 		print(f"{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}::  KrekSupportBot activated")
 
+		await self.send_navigation()
+
 		self.shutdown_flag.set()
+
+	class embed(disnake.Embed):
+		def __init__(self, **kwargs):
+			super().__init__(
+				color = 0x944509,
+				**kwargs
+			)
+
+	async def send_navigation(self):
+		navigation_channel = await self.krekchat.fetch_channel(1398723447399387247)
+		embeds = []
+
+		embeds.append(
+			self.embed(
+				title = "Краткое изложение",
+				description = """
+					❓Если вам просто спросить: <#649314697425846272>
+				"""
+			)
+		)
+
+		await navigation_channel.purge(limit=1)
+
+		webhooks = await navigation_channel.webhooks()
+		webhook = webhooks[0]
+		await webhook.send("", embeds=embeds, username="Навигатор")
 
 async def main():
 	bot = Bot()
