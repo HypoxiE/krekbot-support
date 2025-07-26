@@ -21,7 +21,9 @@ for /f "usebackq delims=" %%A in ("version.txt") do (
 REM Получение комментария к коммиту
 set commit_msg="%description% | version: %version%"
 
-REM echo %commit_msg%
+echo %description%>version.txt
+set /a version+=1
+echo !version!>>version.txt
 
 REM Добавление всех изменений
 git add .
@@ -30,6 +32,6 @@ REM Создание коммита
 git commit -m %commit_msg%
 
 REM Отправка в основную ветку (main или master)
-REM git push
+git push
 
 pause
