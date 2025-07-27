@@ -33,7 +33,3 @@ git commit -m %commit_msg%
 
 REM Отправка в основную ветку (main или master)
 git push
-
-
-
-pause
