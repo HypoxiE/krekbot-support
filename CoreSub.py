@@ -67,6 +67,7 @@ class Bot(commands.Bot):
 			),
 			self.embed(
 				description = """
+## [Нужные файлы (ссылка)](<обязательно добавить ссылку>)
 ## Дополнительная информация
 ### Моды распаковать в папку mods в корневой папке игры!
 ```C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods```
@@ -77,6 +78,12 @@ class Bot(commands.Bot):
 
 **Файл RuinShipScenaruio.rsc (Сценарий турнира) поместить по этому пути**
 ```%userprofile%\\AppData\\LocalLow\\Ludeon Studios\\RimWorld by Ludeon Studios\\Scenarios```
+				"""
+			),
+			self.embed(
+				description = """
+## P.S.
+По любым вопросам можете обращаться к людям с ролью <@&1241274685459529789>, а можете просто пингануть эту роль.
 				"""
 			),
 		]
