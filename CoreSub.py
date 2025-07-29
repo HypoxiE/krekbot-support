@@ -27,7 +27,7 @@ class Bot(commands.Bot):
 
 	class embed(disnake.Embed):
 		def __init__(self, **kwargs):
-			color = kwargs.pop('color', 0x944509)
+			color = kwargs.pop('color', 0xA687CB)
 			super().__init__(color = color, **kwargs)
 
 	async def send_navigation(self):
@@ -36,17 +36,49 @@ class Bot(commands.Bot):
 		embeds = [
 			self.embed(
 				description = """
-Турнир: Ruin Ship
-
-
-Длительность турнира 30 дней 
-Конец турнира по окончанию таймера, либо по завершению концовки будут + баллы за кол-во оставшихся дней до конца (полных)
-
-
-Критерии 
-
+# Добро пожаловать на турнир Ruin Ship!
 				"""
-			)
+			),
+			self.embed(
+				description = """
+## Общая информация о турнире
+Участникам предстоит 30 дней выживать, убегая от роя механоидов на заранее подготовленном сценарии.
+
+-# Организаторы: стример Krekeros и команда discord сервера KreK4at
+				"""
+			),
+			self.embed(
+				description = """
+## Как участвовать?
+- Весь процесс прохождения должен проходить в прямом эфире на [Twitch](https://www.twitch.tv/) или [YouTube](https://www.youtube.com/) (а лучше и там, и там) с тегами <обязательно добавить теги>
+- Можете пригласить всех желающих на свой стрим в канале <#1399878029324324874>
+- В конце и начале следующего стрима (если проходите в несколько подходов) нужно целиком показать базу, гравикорабль и статистику колонии
+- После окончания турнира достаточно только заполнить [форму](https://forms.gle/CNbLLf1JF3rd5iL47)
+- Свой результат вы сможете увидеть в [общей таблице участников](https://docs.google.com/spreadsheets/d/1QkaNYezumeb-QJHSZ3x1vIi5ktf0ooDklYkrP6xSMZc/edit?usp=sharing), а если вы попали в топ-20, то сможете увидеть свой результат в <#1396785366882582538>
+				"""
+			),
+			self.embed(
+				description = """
+## Крайние сроки подачи заявок
+Заявки на участие в турнире принимаются до <обязательно добавить timestamp>. После окончания приёма заявок в течение суток мы перепроверим победителей и озвучим результат турнира.
+
+Заявки, отправленные в последний день до окончания турнира будут оцениваться особо строго, так что просьба отправлять заявки заранее, чтобы у нас было время пересчитать баллы у тех, кто ошибся в подсчёте.
+				"""
+			),
+			self.embed(
+				description = """
+## Дополнительная информация
+### Моды распаковать в папку mods в корневой папке игры!
+```C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods```
+
+### Быстрее всего в папку с другими файлами можно попасть через 'Открыть сохранения' в настройках Rimworld, либо ввести в поиск на пк `%Appdata%`
+**ModsConfig.xml (порядок модов) поместить по этому пути**
+```%userprofile%\\AppData\\LocalLow\\Ludeon Studios\\RimWorld by Ludeon Studios\\Config```
+
+**Файл RuinShipScenaruio.rsc (Сценарий турнира) поместить по этому пути**
+```%userprofile%\\AppData\\LocalLow\\Ludeon Studios\\RimWorld by Ludeon Studios\\Scenarios```
+				"""
+			),
 		]
 
 		await navigation_channel.purge(limit=len(embeds)+1)
