@@ -18,12 +18,12 @@ for /f "usebackq delims=" %%A in ("version.txt") do (
 )
 :done
 
-REM Получение комментария к коммиту
-set commit_msg="%description% | version: %version%"
-
 echo %description%>version.txt
 set /a version+=1
 echo !version!>>version.txt
+
+REM Получение комментария к коммиту
+set commit_msg="%description% | version: !version!"
 
 REM Добавление всех изменений
 git add .
