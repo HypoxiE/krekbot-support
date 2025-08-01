@@ -88,6 +88,14 @@ class Bot(commands.Bot):
 			),
 		]
 
+		test_channel = await self.krekchat.fetch_channel(1382446742087270562)
+		for embed in embeds:
+			if isinstance(embed, list):
+				await test_channel.send("", embeds=embed)
+			else:
+				await test_channel.send("", embed=embed)
+		return
+
 		await navigation_channel.purge(limit=len(embeds)+1)
 
 		#await navigation_channel.send("", embeds=embeds)
