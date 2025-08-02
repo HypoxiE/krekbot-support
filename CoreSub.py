@@ -3,6 +3,7 @@ from disnake.ext import commands
 import asyncio
 import datetime
 import sys
+import argparse
 
 from data.secrets.TOKEN import token
 
@@ -31,6 +32,10 @@ class Bot(commands.Bot):
 			super().__init__(color = color, **kwargs)
 
 	async def send_navigation(self):
+		parser = argparse.ArgumentParser(description="Мой CLI скрипт")
+		parser.add_argument('--mode', choices=['debug', 'release'], default='debug', help='Режим запуска (debug)')
+		args = parser.parse_args()
+
 		navigation_channel = await self.krekchat.fetch_channel(1399856075519561839)
 
 		embeds = [
@@ -71,7 +76,7 @@ class Bot(commands.Bot):
 			self.embed(
 				description = """
 ## 📆 Крайние сроки подачи заявок
-Заявки на участие в турнире принимаются до <t:1754730000:D>. После окончания приёма заявок в течение недели мы исправим все ошибки и проблемы и начнём основной этап.
+Заявки на участие в тестовом турнире принимаются до <t:1754730000:D>. После окончания приёма заявок в течение недели мы исправим все ошибки и проблемы и начнём основной этап.
 				"""
 			),
 			self.embed(
@@ -97,23 +102,22 @@ class Bot(commands.Bot):
 			),
 		]
 
-		test_channel = await self.krekchat.fetch_channel(1382446742087270562)
-		for embed in embeds:
-			if isinstance(embed, list):
-				await test_channel.send("", embeds=embed)
-			else:
-				await test_channel.send("", embed=embed)
-		#return
-
-		#await navigation_channel.send("", embeds=embeds)
-
-		webhooks = await navigation_channel.webhooks()
-		webhook = webhooks[0]
-		for embed in embeds:
-			if isinstance(embed, list):
-				await webhook.send("", embeds=embed, username="Ruin Ship")
-			else:
-				await webhook.send("", embed=embed, username="Ruin Ship")
+		if args.mode == 'debug':
+			test_channel = await self.krekchat.fetch_channel(1382446742087270562)
+			for embed in embeds:
+				if isinstance(embed, list):
+					await test_channel.send("", embeds=embed)
+				else:
+					await test_channel.send("", embed=embed)
+		else:
+			#await navigation_channel.send("", embeds=embeds)
+			webhooks = await navigation_channel.webhooks()
+			webhook = webhooks[0]
+			for embed in embeds:
+				if isinstance(embed, list):
+					await webhook.send("", embeds=embed, username="Ruin Ship")
+				else:
+					await webhook.send("", embed=embed, username="Ruin Ship")
 
 async def main():
 	bot = Bot()
