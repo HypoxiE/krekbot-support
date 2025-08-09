@@ -207,7 +207,6 @@ async def main():
 		bot_task = asyncio.create_task(bot.start(token))
 
 		await bot.shutdown_flag.wait()
-		print(2)
 
 		if not bot.is_closed():
 			await bot.close()
