@@ -115,12 +115,14 @@ class Bot(commands.Bot):
 ```%userprofile%\\AppData\\LocalLow\\Ludeon Studios\\RimWorld by Ludeon Studios\\Scenarios```
 				"""
 			),
-			self.embed(
+		]
+		'''self.embed(
 				description = """
 ## <:A_anime_u_cut:910548853802029076> Пожелания напоследок
 Удачи в вашем прохождении и помните, что самое главное - это путь (даже если без караванов), так что попробуйте не заруинить свой корабль и победить мехрой за эти 30 дней и у вас обязательно всё получится!(или нет<a:AnimatedA_PeepoNoob:982560159974965308>) Мы верим в вас и в вашу победную! Точно так же, как стример верит в свою!<a:AnimatedA_ThisIsFine:982563794133852220>
 				"""
-			),
+			),'''
+		embeds += [
 			self.embed(
 				description = """
 ## P.S.
