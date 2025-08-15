@@ -37,7 +37,6 @@ class Bot(commands.Bot):
 			self.embed(
 				description = """
 # 🔥Добро пожаловать на турнир Ruin Ship!
-## Начало турниира в <t:1755270000:f>!
 				"""
 			),
 			self.embed(
